@@ -64,8 +64,8 @@ Object.defineProperty(navigator, 'languages', {
 """
 
 DEFAULT_SHORTCUTS = [
-    {"title": "Google", "url": "https://www.google.com", "icon": "🔍"},
-    {"title": "YouTube", "url": "https://www.youtube.com", "icon": "▶️"},
+    {"title": "Google", "url": "https://www.google.com", "icon": "🌐"},
+    {"title": "YouTube", "url": "https://www.youtube.com", "icon": "▶"},
     {"title": "GitHub", "url": "https://github.com", "icon": "🐙"},
     {"title": "Reddit", "url": "https://www.reddit.com", "icon": "🤖"},
     {"title": "ChatGPT", "url": "https://chatgpt.com", "icon": "🧠"}
@@ -116,17 +116,48 @@ def generate_home_html(shortcuts):
             min-height: 100vh;
             margin: 0;
         }}
+
+        /* RED LAVA ANIMATION KEYFRAMES (LEFT TO RIGHT) */
+        @keyframes lavaFlow {{
+            0% {{ background-position: -100% 0; }}
+            -100% {{ background-position: 0% 0; }}
+        }}
+
         .container {{
             border: 2px solid #ff0055;
-            box-shadow: 0 0 25px #9d00ff;
-            padding: 35px;
+            box-shadow: 0 0 25px #9d00ff, 0 0 15px rgba(255, 0, 0, 0.4);
+            padding: 40px 35px 35px 35px;
             background: rgba(18, 5, 36, 0.95);
             border-radius: 12px;
             text-align: center;
             width: 85%;
             max-width: 700px;
             position: relative;
+            overflow: hidden; /* Clips the rounded top bar */
         }}
+
+        /* FLOWING RED LAVA TOP BAR */
+        .container::before {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 7px;
+            background: linear-gradient(
+                90deg, 
+                #800000 0%, 
+                #ff0000 20%, 
+                #ff5500 40%, 
+                #ff0055 60%, 
+                #ff0000 80%, 
+                #800000 100%
+            );
+            background-size: 200% 100%;
+            animation: lavaFlow 3s linear infinite;
+            box-shadow: 0 0 12px #ff0000, 0 0 20px #ff3300;
+        }}
+
         h1 {{
             font-size: 2.8rem;
             text-shadow: 0 0 10px #ff0055, 0 0 20px #9d00ff;
@@ -257,11 +288,34 @@ def generate_home_html(shortcuts):
         .modal-box {{
             background: #100424;
             border: 2px solid #ff0055;
-            box-shadow: 0 0 20px #9d00ff;
-            padding: 25px;
+            box-shadow: 0 0 20px #9d00ff, 0 0 15px rgba(255, 0, 0, 0.4);
+            padding: 30px 25px 25px 25px;
             border-radius: 10px;
             width: 320px;
             text-align: left;
+            position: relative;
+            overflow: hidden;
+        }}
+        /* MODAL BOX TOP LAVA BAR */
+        .modal-box::before {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(
+                90deg, 
+                #800000 0%, 
+                #ff0000 20%, 
+                #ff5500 40%, 
+                #ff0055 60%, 
+                #ff0000 80%, 
+                #800000 100%
+            );
+            background-size: 200% 100%;
+            animation: lavaFlow 3s linear infinite;
+            box-shadow: 0 0 10px #ff0000;
         }}
         .modal-box h3 {{
             margin-top: 0;
